@@ -7,33 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Switch
-        android:id="@+id/switch2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="253dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286" />
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="253dp" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -42,20 +15,22 @@
         tools:layout_editor_absoluteX="150dp"
         tools:layout_editor_absoluteY="374dp" />
 
-    <Switch
-        android:id="@+id/switch4"
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="298dp" />
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="224dp" />
 
-    <Switch
-        android:id="@+id/switch3"
+    <EditText
+        android:id="@+id/editTextTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="298dp" />
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="297dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
