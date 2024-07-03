@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "LearnGit"
+rootProject.name = "GoogleMapAPI"
 include(":app")
