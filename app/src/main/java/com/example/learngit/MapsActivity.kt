@@ -30,6 +30,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+//        val businesses = listOf(
+//            LatLng(41.0082, 28.9784), // A
+//            LatLng(39.9334, 32.8597), // B
+//            LatLng(38.4237, 27.1428), // C
+//            LatLng(36.8841, 30.7056)  // D
+//        )
+//
+//
+//        businesses.forEach { location ->
+//            mMap.addMarker(MarkerOptions().position(location).title("Business at ${location.latitude}, ${location.longitude}"))
+//        }
+//
+//
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(businesses[0], 12f))
+
         val istanbul = LatLng(41.0082, 28.9784)
         mMap.addMarker(MarkerOptions().position(istanbul).title("Marker in Istanbul"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(istanbul,12f))
