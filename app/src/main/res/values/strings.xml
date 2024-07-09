@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">LearnGit</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="customer_bottom_navigation_menu_home">Ana Sayfa</string>
+    <string name="customer_bottom_navigation_menu_discover">Keşfet</string>
+    <string name="customer_bottom_navigation_menu_reservations">Rezervasyonlar</string>
+    <string name="customer_bottom_navigation_menu_messages">Mesajlar</string>
+    <string name="customer_bottom_navigation_menu_profile">Profil</string>
 </resources>
