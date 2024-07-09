@@ -11,11 +11,13 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.maps.android.SphericalUtil
 
 class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
@@ -45,6 +47,33 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    // Home işlemleri
+                    true
+                }
+                R.id.nav_discover -> {
+                    // Discover işlemleri
+                    true
+                }
+                R.id.nav_reservations -> {
+                    // Reservations işlemleri
+                    true
+                }
+                R.id.nav_messages -> {
+                    // Messages işlemleri
+                    true
+                }
+                R.id.nav_profile -> {
+                    // Profile işlemleri
+                    true
+                }
+                else -> false
+            }
+        }
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         val mapFragment = supportFragmentManager
@@ -66,15 +95,13 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        val options = GoogleMapOptions()
 
-        // Satelite görüntüyü etkinleştirme (uydu görüntüsü)
-        mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
-
-        // Zoom kontrollerini etkinleştirme
-        mMap.uiSettings.isZoomControlsEnabled = false
-
-        // Harita rotasyonunu etkinleştirme
-        mMap.uiSettings.isRotateGesturesEnabled = true
+        options.mapType(GoogleMap.MAP_TYPE_HYBRID)
+            .compassEnabled(false)
+            .rotateGesturesEnabled(true)
+            .tiltGesturesEnabled(false)
+            .zoomControlsEnabled(false)
 
         // Konum butonunu de-etkinleştirme
         mMap.uiSettings.isMyLocationButtonEnabled = false
