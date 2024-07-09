@@ -53,41 +53,41 @@
                 app:singleLine="true"
                 app:singleSelection="true">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip1"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        app:chipBackgroundColor="@color/white"
-                        android:layout_height="wrap_content"
-                        android:text="Restoran"
-                        app:chipIconVisible="true"
-                        app:chipIconTint="@color/black"
-                        app:closeIconVisible="false"
-                        app:rippleColor="@color/rippleColor" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip1"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    app:chipBackgroundColor="@color/white"
+                    android:layout_height="wrap_content"
+                    android:text="Restoran"
+                    app:chipIconVisible="true"
+                    app:chipIconTint="@color/black"
+                    app:closeIconVisible="false"
+                    app:rippleColor="@color/rippleColor" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip2"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:chipBackgroundColor="@color/white"
-                        android:text="Cafe"
-                        app:chipIconVisible="true"
-                        app:chipIconTint="@color/black"
-                        app:closeIconVisible="false"
-                        app:rippleColor="@color/rippleColor" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip2"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/white"
+                    android:text="Cafe"
+                    app:chipIconVisible="true"
+                    app:chipIconTint="@color/black"
+                    app:closeIconVisible="false"
+                    app:rippleColor="@color/rippleColor" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip3"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:chipBackgroundColor="@color/white"
-                        android:text="Meyhane"
-                        app:chipIconVisible="true"
-                        app:chipIconTint="@color/black"
-                        app:closeIconVisible="false"
-                        app:rippleColor="@color/rippleColor" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip3"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/white"
+                    android:text="Meyhane"
+                    app:chipIconVisible="true"
+                    app:chipIconTint="@color/black"
+                    app:closeIconVisible="false"
+                    app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip4"
@@ -127,4 +127,15 @@
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
     </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_navigation_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
