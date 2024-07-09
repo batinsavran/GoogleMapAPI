@@ -36,8 +36,8 @@
             android:hint="Nerede rezervasyon yapmak istersin?"
             android:textSize="15sp"
             android:background="@drawable/search_background"
-            android:padding="8dp"
-            android:drawablePadding="8dp"
+            android:padding="7dp"
+            android:drawablePadding="7dp"
             android:drawableEnd="@android:drawable/ic_menu_search" />
 
         <HorizontalScrollView
