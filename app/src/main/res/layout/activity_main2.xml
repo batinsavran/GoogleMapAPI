@@ -34,11 +34,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nerede rezervasyon yapmak istersin?"
+            android:textSize="15sp"
             android:background="@drawable/search_background"
-            android:padding="12dp"
+            android:padding="8dp"
             android:drawablePadding="8dp"
-            android:drawableEnd="@android:drawable/ic_menu_search"
-            android:layout_marginBottom="8dp" />
+            android:drawableEnd="@android:drawable/ic_menu_search" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -53,41 +53,77 @@
                 app:singleLine="true"
                 app:singleSelection="true">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Restoran" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip1"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        app:chipBackgroundColor="@color/white"
+                        android:layout_height="wrap_content"
+                        android:text="Restoran"
+                        app:chipIconVisible="true"
+                        app:chipIconTint="@color/black"
+                        app:closeIconVisible="false"
+                        app:rippleColor="@color/rippleColor" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cafe" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip2"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:chipBackgroundColor="@color/white"
+                        android:text="Cafe"
+                        app:chipIconVisible="true"
+                        app:chipIconTint="@color/black"
+                        app:closeIconVisible="false"
+                        app:rippleColor="@color/rippleColor" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Meyhane" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip3"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:chipBackgroundColor="@color/white"
+                        android:text="Meyhane"
+                        app:chipIconVisible="true"
+                        app:chipIconTint="@color/black"
+                        app:closeIconVisible="false"
+                        app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip4"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bar" />
+                    app:chipBackgroundColor="@color/white"
+                    android:text="Bar"
+                    app:chipIconVisible="true"
+                    app:chipIconTint="@color/black"
+                    app:closeIconVisible="false"
+                    app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip5"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kahve" />
+                    app:chipBackgroundColor="@color/white"
+                    android:text="Kahve"
+                    app:chipIconVisible="true"
+                    app:chipIconTint="@color/black"
+                    app:closeIconVisible="false"
+                    app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip6"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pastane" />
+                    app:chipBackgroundColor="@color/white"
+                    android:text="Pastane"
+                    app:chipIconVisible="true"
+                    app:chipIconTint="@color/black"
+                    app:closeIconVisible="false"
+                    app:rippleColor="@color/rippleColor" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
     </LinearLayout>
