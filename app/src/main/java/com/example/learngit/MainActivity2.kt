@@ -2,6 +2,8 @@ package com.example.learngit
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -28,8 +30,8 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
     private var currentLatLng: LatLng? = null
 
     private val category1Businesses = listOf(
-        Business("Restoran A", LatLng(36.7391, 29.9270)),
-        Business("Restoran B", LatLng(36.7320, 29.9145))
+        Business("Restorant A", LatLng(36.7391, 29.9270)),
+        Business("Restorant B", LatLng(36.7320, 29.9145))
     )
 
     private val category2Businesses = listOf(
@@ -48,31 +50,32 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+        bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    // Home işlemleri
                     true
                 }
+
                 R.id.nav_discover -> {
-                    // Discover işlemleri
                     true
                 }
+
                 R.id.nav_reservations -> {
-                    // Reservations işlemleri
                     true
                 }
+
                 R.id.nav_messages -> {
-                    // Messages işlemleri
                     true
                 }
+
                 R.id.nav_profile -> {
-                    // Profile işlemleri
                     true
                 }
+
                 else -> false
             }
         }
+
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -103,7 +106,6 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
             .tiltGesturesEnabled(false)
             .zoomControlsEnabled(false)
 
-        // Konum butonunu de-etkinleştirme
         mMap.uiSettings.isMyLocationButtonEnabled = false
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -150,7 +152,17 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
             val businessLatLng = business.location
             val distance = getDistanceInMeters(centerLatLng, businessLatLng)
             if (distance <= radiusInMeters) {
-                val icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                val drawable = ContextCompat.getDrawable(this, R.drawable.location)
+                val bitmap = Bitmap.createBitmap(
+                    drawable!!.intrinsicWidth,
+                    drawable.intrinsicHeight,
+                    Bitmap.Config.ARGB_8888
+                )
+                val canvas = Canvas(bitmap)
+                drawable.setBounds(0, 0, canvas.width, canvas.height)
+                drawable.draw(canvas)
+                val icon = BitmapDescriptorFactory.fromBitmap(bitmap)
+
                 mMap.addMarker(
                     MarkerOptions()
                         .position(businessLatLng)
@@ -166,13 +178,22 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
         mMap.clear()
         val radiusInMeters = 5000.0
 
-        currentLatLng?.let { currentLocation ->
+        currentLatLng?.let {
             for (business in businesses) {
                 val businessLatLng = business.location
                 val distance = getDistanceInMeters(centerLatLng, businessLatLng)
                 if (distance <= radiusInMeters) {
-                    val icon =
-                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                    val drawable = ContextCompat.getDrawable(this, R.drawable.location)
+                    val bitmap = Bitmap.createBitmap(
+                        drawable!!.intrinsicWidth,
+                        drawable.intrinsicHeight,
+                        Bitmap.Config.ARGB_8888
+                    )
+                    val canvas = Canvas(bitmap)
+                    drawable.setBounds(0, 0, canvas.width, canvas.height)
+                    drawable.draw(canvas)
+                    val icon = BitmapDescriptorFactory.fromBitmap(bitmap)
+
                     mMap.addMarker(
                         MarkerOptions()
                             .position(businessLatLng)
