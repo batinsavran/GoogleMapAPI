@@ -6,6 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.learngit.databinding.ActivityMarkerBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -13,16 +16,13 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.google.maps.android.SphericalUtil
 
 class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var binding: ActivityMarkerBinding
     private var currentLatLng: LatLng? = null
 
     private val category1Businesses = listOf(
@@ -42,7 +42,8 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_marker)
+        binding = ActivityMarkerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -50,20 +51,15 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-        val chip1 = findViewById<Chip>(R.id.chip1)
-        val chip2 = findViewById<Chip>(R.id.chip2)
-        val chip3 = findViewById<Chip>(R.id.chip3)
-
-        chip1.setOnCheckedChangeListener { _, isChecked ->
+        binding.chip1.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) showBusinesses(category1Businesses)
         }
 
-        chip2.setOnCheckedChangeListener { _, isChecked ->
+        binding.chip2.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) showBusinesses(category2Businesses)
         }
 
-        chip3.setOnCheckedChangeListener { _, isChecked ->
+        binding.chip3.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) showBusinesses(category3Businesses)
         }
     }
@@ -72,12 +68,15 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED) {
+            == PackageManager.PERMISSION_GRANTED
+        ) {
             mMap.isMyLocationEnabled = true
             getCurrentLocation()
         } else {
-            ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
+            )
         }
 
         mMap.setOnCameraIdleListener {
@@ -90,9 +89,11 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
             .addOnSuccessListener { location ->
                 if (location != null) {
                     currentLatLng = LatLng(location.latitude, location.longitude)
-                    mMap.addMarker(MarkerOptions()
-                        .position(currentLatLng!!)
-                        .title("Mevcut Konum"))
+                    mMap.addMarker(
+                        MarkerOptions()
+                            .position(currentLatLng!!)
+                            .title("Mevcut Konum")
+                    )
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
 
                     showBusinesses(category1Businesses + category2Businesses + category3Businesses)
@@ -111,10 +112,12 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
             val distance = getDistanceInMeters(centerLatLng, businessLatLng)
             if (distance <= radiusInMeters) {
                 val icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
-                mMap.addMarker(MarkerOptions()
-                    .position(businessLatLng)
-                    .title(business.name)
-                    .icon(icon))
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(businessLatLng)
+                        .title(business.name)
+                        .icon(icon)
+                )
             }
         }
     }
@@ -129,11 +132,14 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
                 val businessLatLng = business.location
                 val distance = getDistanceInMeters(centerLatLng, businessLatLng)
                 if (distance <= radiusInMeters) {
-                    val icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
-                    mMap.addMarker(MarkerOptions()
-                        .position(businessLatLng)
-                        .title(business.name)
-                        .icon(icon))
+                    val icon =
+                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                    mMap.addMarker(
+                        MarkerOptions()
+                            .position(businessLatLng)
+                            .title(business.name)
+                            .icon(icon)
+                    )
                 }
             }
         }
