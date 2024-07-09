@@ -67,6 +67,18 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        // Satelite görüntüyü etkinleştirme (uydu görüntüsü)
+        mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+
+        // Zoom kontrollerini etkinleştirme
+        mMap.uiSettings.isZoomControlsEnabled = false
+
+        // Harita rotasyonunu etkinleştirme
+        mMap.uiSettings.isRotateGesturesEnabled = true
+
+        // Konum butonunu de-etkinleştirme
+        mMap.uiSettings.isMyLocationButtonEnabled = false
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED
         ) {
@@ -144,6 +156,7 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
+
 
     private fun getDistanceInMeters(start: LatLng, end: LatLng): Double {
         return SphericalUtil.computeDistanceBetween(start, end)
