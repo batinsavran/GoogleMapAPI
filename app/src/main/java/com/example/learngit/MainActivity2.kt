@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.learngit.databinding.ActivityMarkerBinding
+import com.example.learngit.databinding.ActivityMain2Binding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,27 +22,27 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var binding: ActivityMarkerBinding
+    private lateinit var binding: ActivityMain2Binding
     private var currentLatLng: LatLng? = null
 
     private val category1Businesses = listOf(
-        Business("Business B", LatLng(36.7391, 29.9270)),
-        Business("Business C", LatLng(36.7320, 29.9145))
+        Business("Restoran A", LatLng(36.7391, 29.9270)),
+        Business("Restoran B", LatLng(36.7320, 29.9145))
     )
 
     private val category2Businesses = listOf(
-        Business("Business D", LatLng(36.7360, 29.9300)),
-        Business("Business E", LatLng(36.7380, 29.9240))
+        Business("Cafe C", LatLng(36.7360, 29.9300)),
+        Business("Cafe D", LatLng(36.7380, 29.9240))
     )
 
     private val category3Businesses = listOf(
-        Business("Business F", LatLng(36.7330, 29.9160)),
-        Business("Business H", LatLng(36.7340, 29.9180))
+        Business("Meyhane E", LatLng(36.7330, 29.9160)),
+        Business("Meyhane F", LatLng(36.7340, 29.9180))
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMarkerBinding.inflate(layoutInflater)
+        binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
