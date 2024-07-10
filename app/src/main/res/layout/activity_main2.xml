@@ -34,11 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nerede rezervasyon yapmak istersin?"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:background="@drawable/search_background"
-            android:padding="7dp"
-            android:drawablePadding="7dp"
-            android:drawableEnd="@android:drawable/ic_menu_search" />
+            android:padding="14dp"
+            android:drawableEnd="@drawable/search" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -131,7 +130,9 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
+        app:itemActiveIndicatorStyle="@color/black"
+        android:background="@color/white"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_navigation_menu"
         app:layout_constraintBottom_toBottomOf="parent"
