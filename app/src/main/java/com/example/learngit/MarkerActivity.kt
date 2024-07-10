@@ -26,18 +26,18 @@ class MarkerActivity : AppCompatActivity(), OnMapReadyCallback {
     private var currentLatLng: LatLng? = null // Sınıf düzeyinde currentLatLng
 
     private val category1Businesses = listOf(
-        Business("Business A", LatLng(37.3960, -122.0920)),
-        Business("Business B", LatLng(37.3795, -122.0750))
+        Business("com.example.learngit.Business A", LatLng(37.3960, -122.0920)),
+        Business("com.example.learngit.Business B", LatLng(37.3795, -122.0750))
     )
 
     private val category2Businesses = listOf(
-        Business("Business C", LatLng(37.3890, -122.0860)),
-        Business("Business D", LatLng(37.4000, -122.0700))
+        Business("com.example.learngit.Business C", LatLng(37.3890, -122.0860)),
+        Business("com.example.learngit.Business D", LatLng(37.4000, -122.0700))
     )
 
     private val category3Businesses = listOf(
-        Business("Business E", LatLng(37.3850, -122.1000)),
-        Business("Business F", LatLng(37.3800, -122.0800))
+        Business("com.example.learngit.Business E", LatLng(37.3850, -122.1000)),
+        Business("com.example.learngit.Business F", LatLng(37.3800, -122.0800))
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,4 +128,4 @@ class MarkerActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 }
 
-//data class Business(val name: String, val location: LatLng)
+//data class com.example.learngit.Business(val name: String, val location: LatLng)

@@ -7,8 +7,8 @@
     <string name="customer_bottom_navigation_menu_messages">Mesajlar</string>
     <string name="customer_bottom_navigation_menu_profile">Profil</string>
 
-        <string name="business_name">Business A</string>
-        <string name="kitchen_type">Dünya Mutfağı</string>
-        <string name="location_distance">5 km</string>
-        <string name="reservation_button">Rezervasyon yap</string>
+    <string name="business_name">Business A</string>
+    <string name="kitchen_type">Dünya Mutfağı</string>
+    <string name="location_distance">5 km</string>
+    <string name="reservation_button">Rezervasyon yap</string>
 </resources>

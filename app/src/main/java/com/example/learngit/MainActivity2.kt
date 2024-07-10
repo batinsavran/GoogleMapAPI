@@ -225,4 +225,4 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
     }
 }
 
-data class Business(val name: String, val location: LatLng)
+//data class com.example.learngit.Business(val name: String, val location: LatLng)

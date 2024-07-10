@@ -38,7 +38,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 //
 //
 //        businesses.forEach { location ->
-//            mMap.addMarker(MarkerOptions().position(location).title("Business at ${location.latitude}, ${location.longitude}"))
+//            mMap.addMarker(MarkerOptions().position(location).title("com.example.learngit.Business at ${location.latitude}, ${location.longitude}"))
 //        }
 //
 //
