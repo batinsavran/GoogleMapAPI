@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,24 +10,19 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:id="@+id/search_bar_container"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@android:color/transparent"
         android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        app:layout_anchor="@id/map"
+        app:layout_anchorGravity="top|center_horizontal">
 
         <EditText
             android:id="@+id/search_bar"
@@ -56,87 +51,241 @@
                     android:id="@+id/chip1"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
-                    app:chipBackgroundColor="@color/white"
                     android:layout_height="wrap_content"
                     android:text="Restoran"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
-                    app:rippleColor="@color/rippleColor" />
+                    app:rippleColor="@color/rippleColor"
+                    app:chipBackgroundColor="@color/white" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip2"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:chipBackgroundColor="@color/white"
                     android:text="Cafe"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
-                    app:rippleColor="@color/rippleColor" />
+                    app:rippleColor="@color/rippleColor"
+                    app:chipBackgroundColor="@color/white" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip3"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:chipBackgroundColor="@color/white"
                     android:text="Meyhane"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
-                    app:rippleColor="@color/rippleColor" />
+                    app:rippleColor="@color/rippleColor"
+                    app:chipBackgroundColor="@color/white" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip4"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:chipBackgroundColor="@color/white"
                     android:text="Bar"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
-                    app:rippleColor="@color/rippleColor" />
+                    app:rippleColor="@color/rippleColor"
+                    app:chipBackgroundColor="@color/white" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip5"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:chipBackgroundColor="@color/white"
                     android:text="Kahve"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
-                    app:rippleColor="@color/rippleColor" />
+                    app:rippleColor="@color/rippleColor"
+                    app:chipBackgroundColor="@color/white" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip6"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:chipBackgroundColor="@color/white"
                     android:text="Pastane"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
-                    app:rippleColor="@color/rippleColor" />
+                    app:rippleColor="@color/rippleColor"
+                    app:chipBackgroundColor="@color/white" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:itemActiveIndicatorStyle="@color/black"
         android:background="@color/white"
-        android:layout_gravity="bottom"
+        app:itemActiveIndicatorStyle="@color/black"
         app:menu="@menu/bottom_navigation_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_anchorGravity="bottom"
+        app:layout_anchor="@id/map" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:elevation="10dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="5dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/businessImage"
+                android:layout_width="122dp"
+                android:layout_height="69dp"
+                android:layout_marginTop="15dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.07"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/businessPhotoImageView"
+                    android:layout_width="122dp"
+                    android:layout_height="69dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/card_img" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/businessNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Business A"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.117"
+                app:layout_constraintStart_toEndOf="@+id/businessImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/kitchenTypeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Dünya Mutfağı"
+                android:textColor="#616060"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="@+id/businessNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/businessNameTextView" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="6dp"
+                android:padding="1dp"
+                android:src="@drawable/distance"
+                app:layout_constraintStart_toStartOf="@+id/kitchenTypeTextView"
+                app:layout_constraintTop_toBottomOf="@+id/kitchenTypeTextView" />
+
+            <TextView
+                android:id="@+id/locationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="5 km"
+                android:textColor="#B01E1E1E"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+            <ImageButton
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/white"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/like"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/confirmButton"
+                style="@android:style/Widget.Button"
+                android:layout_width="200dp"
+                android:layout_height="38dp"
+                android:background="@drawable/button_background"
+                android:elevation="3dp"
+                android:fontFamily="sans-serif"
+                android:text="Rezervasyon yap"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonGoMessage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonGoMessage"
+                app:layout_constraintTop_toTopOf="@+id/buttonGoMessage" />
+
+            <ImageButton
+                android:id="@+id/buttonGoChat"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@drawable/go_button_background"
+                android:elevation="3dp"
+                android:scaleType="center"
+                android:src="@drawable/location_ico"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/businessImage"
+                app:layout_constraintTop_toBottomOf="@+id/businessImage" />
+
+            <ImageButton
+                android:id="@+id/buttonGoCall"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/go_button_background"
+                android:elevation="3dp"
+                android:scaleType="center"
+                android:src="@drawable/phone"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonGoChat"
+                app:layout_constraintStart_toEndOf="@+id/buttonGoChat"
+                app:layout_constraintTop_toTopOf="@+id/buttonGoChat" />
+
+            <ImageButton
+                android:id="@+id/buttonGoMessage"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/go_button_background"
+                android:elevation="3dp"
+                android:scaleType="center"
+                android:src="@drawable/message"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonGoCall"
+                app:layout_constraintStart_toEndOf="@+id/buttonGoCall"
+                app:layout_constraintTop_toTopOf="@+id/buttonGoCall" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
