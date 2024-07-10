@@ -33,7 +33,7 @@
                 android:id="@+id/businessPhotoImageView"
                 android:layout_width="122dp"
                 android:layout_height="69dp"
-                android:scaleType="fitCenter"
+                android:scaleType="center"
                 android:src="@drawable/card_img" />
 
         </androidx.cardview.widget.CardView>
