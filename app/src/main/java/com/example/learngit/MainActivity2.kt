@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -18,8 +19,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.maps.android.SphericalUtil
 
 class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
@@ -42,6 +45,11 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
     private val category3Businesses = listOf(
         Business("Meyhane E", LatLng(36.7330, 29.9160)),
         Business("Meyhane F", LatLng(36.7340, 29.9180))
+    )
+
+    private val category4Businesses = listOf(
+        Business("Bar G", LatLng(37.4118, -122.0897)),
+        Business("Bar H", LatLng(37.4087, -122.0952))
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,11 +84,9 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         binding.chip1.setOnCheckedChangeListener { _, isChecked ->
@@ -93,6 +99,10 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
         binding.chip3.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) showBusinesses(category3Businesses)
+        }
+
+        binding.chip4.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) showBusinesses(category4Businesses)
         }
     }
 
@@ -123,6 +133,8 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
         mMap.setOnCameraIdleListener {
             updateMarkers()
         }
+
+        setupMap()
     }
 
     private fun getCurrentLocation() {
@@ -147,7 +159,8 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
         mMap.clear()
         val radiusInMeters = 5000.0
 
-        val allBusinesses = category1Businesses + category2Businesses + category3Businesses
+        val allBusinesses =
+            category1Businesses + category2Businesses + category3Businesses + category4Businesses
         for (business in allBusinesses) {
             val businessLatLng = business.location
             val distance = getDistanceInMeters(centerLatLng, businessLatLng)
@@ -205,10 +218,36 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-
     private fun getDistanceInMeters(start: LatLng, end: LatLng): Double {
         return SphericalUtil.computeDistanceBetween(start, end)
     }
+
+    @SuppressWarnings("MissingPermission")
+    private fun setupMap() {
+        mMap.setOnMarkerClickListener { marker ->
+            showBottomSheet(marker)
+            true
+        }
+    }
+
+    private fun showBottomSheet(marker: Marker) {
+        val dialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.item_business, null)
+
+        val businessNameTextView = view.findViewById<TextView>(R.id.businessNameTextView)
+        val kitchenTypeTextView = view.findViewById<TextView>(R.id.kitchenTypeTextView)
+        val locationTextView = view.findViewById<TextView>(R.id.locationTextView)
+
+        businessNameTextView.text = marker.title
+        kitchenTypeTextView.text = "Dünya Mutfağı"
+        locationTextView.text = "5 km"
+
+        dialog.setCancelable(true)
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
+
 }
 
 data class Business(val name: String, val location: LatLng)
