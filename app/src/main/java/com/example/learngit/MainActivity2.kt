@@ -225,6 +225,18 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
     @SuppressWarnings("MissingPermission")
     private fun setupMap() {
         mMap.setOnMarkerClickListener { marker ->
+            val drawable = ContextCompat.getDrawable(this, R.drawable.selected_marker)
+            val bitmap = Bitmap.createBitmap(
+                drawable!!.intrinsicWidth,
+                drawable.intrinsicHeight,
+                Bitmap.Config.ARGB_8888
+            )
+            val canvas = Canvas(bitmap)
+            drawable.setBounds(0, 0, canvas.width, canvas.height)
+            drawable.draw(canvas)
+            val icon = BitmapDescriptorFactory.fromBitmap(bitmap)
+
+            marker.setIcon(icon)
             showBottomSheet(marker)
             true
         }
