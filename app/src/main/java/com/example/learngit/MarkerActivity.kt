@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -13,8 +15,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.maps.android.SphericalUtil
@@ -72,12 +72,15 @@ class MarkerActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED) {
+            == PackageManager.PERMISSION_GRANTED
+        ) {
             mMap.isMyLocationEnabled = true
             getCurrentLocation()
         } else {
-            ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
+            )
         }
     }
 
@@ -86,9 +89,11 @@ class MarkerActivity : AppCompatActivity(), OnMapReadyCallback {
             .addOnSuccessListener { location ->
                 if (location != null) {
                     currentLatLng = LatLng(location.latitude, location.longitude)
-                    mMap.addMarker(MarkerOptions()
-                        .position(currentLatLng!!)
-                        .title("Mevcut Konum"))
+                    mMap.addMarker(
+                        MarkerOptions()
+                            .position(currentLatLng!!)
+                            .title("Mevcut Konum")
+                    )
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
 
                     showBusinesses(category1Businesses + category2Businesses + category3Businesses)
@@ -105,11 +110,14 @@ class MarkerActivity : AppCompatActivity(), OnMapReadyCallback {
                 val businessLatLng = business.location
                 val distance = getDistanceInMeters(currentLocation, businessLatLng)
                 if (distance <= radiusInMeters) {
-                    val icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
-                    mMap.addMarker(MarkerOptions()
-                        .position(businessLatLng)
-                        .title(business.name)
-                        .icon(icon))
+                    val icon =
+                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                    mMap.addMarker(
+                        MarkerOptions()
+                            .position(businessLatLng)
+                            .title(business.name)
+                            .icon(icon)
+                    )
                 }
             }
         }
@@ -120,4 +128,4 @@ class MarkerActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 }
 
-data class Business(val name: String, val location: LatLng)
+//data class Business(val name: String, val location: LatLng)

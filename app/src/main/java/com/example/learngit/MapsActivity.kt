@@ -1,15 +1,14 @@
 package com.example.learngit
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
+import androidx.appcompat.app.AppCompatActivity
+import com.example.learngit.databinding.ActivityMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.learngit.databinding.ActivityMapsBinding
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -47,7 +46,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val istanbul = LatLng(41.0082, 28.9784)
         mMap.addMarker(MarkerOptions().position(istanbul).title("Marker in Istanbul"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(istanbul,12f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(istanbul, 12f))
     }
 
 }
