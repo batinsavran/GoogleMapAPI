@@ -1,11 +1,11 @@
 package com.example.learngit
 
+import CustomInfoWindowAdapter
 import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -14,7 +14,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -22,7 +21,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.maps.android.SphericalUtil
 
 class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
@@ -31,6 +29,7 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var binding: ActivityMain2Binding
     private var currentLatLng: LatLng? = null
+    private lateinit var customInfoWindowAdapter: CustomInfoWindowAdapter
 
     private val category1Businesses = listOf(
         Business("Restorant A", LatLng(36.7391, 29.9270)),
@@ -60,26 +59,11 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> {
-                    true
-                }
-
-                R.id.nav_discover -> {
-                    true
-                }
-
-                R.id.nav_reservations -> {
-                    true
-                }
-
-                R.id.nav_messages -> {
-                    true
-                }
-
-                R.id.nav_profile -> {
-                    true
-                }
-
+                R.id.nav_home -> true
+                R.id.nav_discover -> true
+                R.id.nav_reservations -> true
+                R.id.nav_messages -> true
+                R.id.nav_profile -> true
                 else -> false
             }
         }
@@ -108,13 +92,6 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val options = GoogleMapOptions()
-
-        options.mapType(GoogleMap.MAP_TYPE_HYBRID)
-            .compassEnabled(false)
-            .rotateGesturesEnabled(true)
-            .tiltGesturesEnabled(false)
-            .zoomControlsEnabled(false)
 
         mMap.uiSettings.isMyLocationButtonEnabled = false
 
@@ -134,8 +111,16 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
             updateMarkers()
         }
 
-        setupMap()
+        customInfoWindowAdapter = CustomInfoWindowAdapter(layoutInflater)
+        mMap.setInfoWindowAdapter(customInfoWindowAdapter)
+
+        mMap.setOnMarkerClickListener { marker ->
+            customInfoWindowAdapter.showMarkerInfoWindow(marker)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 15f))
+            true
+        }
     }
+
 
     private fun getCurrentLocation() {
         fusedLocationClient.lastLocation
@@ -156,11 +141,13 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
     private fun updateMarkers() {
         val centerLatLng = mMap.cameraPosition.target
-        mMap.clear()
         val radiusInMeters = 5000.0
+
+        val currentMarkers = mutableListOf<Marker>()
 
         val allBusinesses =
             category1Businesses + category2Businesses + category3Businesses + category4Businesses
+
         for (business in allBusinesses) {
             val businessLatLng = business.location
             val distance = getDistanceInMeters(centerLatLng, businessLatLng)
@@ -176,20 +163,33 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
                 drawable.draw(canvas)
                 val icon = BitmapDescriptorFactory.fromBitmap(bitmap)
 
-                mMap.addMarker(
+                val marker = mMap.addMarker(
                     MarkerOptions()
                         .position(businessLatLng)
                         .title(business.name)
                         .icon(icon)
+                        .snippet("Restoran")
                 )
+
+                if (marker != null) {
+                    currentMarkers.add(marker)
+                }
             }
+        }
+
+        mMap.setOnMarkerClickListener { marker ->
+            customInfoWindowAdapter.showMarkerInfoWindow(marker)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 15f))
+            true
         }
     }
 
+
     private fun showBusinesses(businesses: List<Business>) {
         val centerLatLng = mMap.cameraPosition.target
-        mMap.clear()
         val radiusInMeters = 5000.0
+
+        mMap.clear()
 
         currentLatLng?.let {
             for (business in businesses) {
@@ -212,54 +212,17 @@ class MainActivity2 : AppCompatActivity(), OnMapReadyCallback {
                             .position(businessLatLng)
                             .title(business.name)
                             .icon(icon)
+                            .snippet("Restoran")
                     )
                 }
             }
         }
     }
 
+
     private fun getDistanceInMeters(start: LatLng, end: LatLng): Double {
         return SphericalUtil.computeDistanceBetween(start, end)
     }
-
-    @SuppressWarnings("MissingPermission")
-    private fun setupMap() {
-        mMap.setOnMarkerClickListener { marker ->
-            val drawable = ContextCompat.getDrawable(this, R.drawable.selected_marker)
-            val bitmap = Bitmap.createBitmap(
-                drawable!!.intrinsicWidth,
-                drawable.intrinsicHeight,
-                Bitmap.Config.ARGB_8888
-            )
-            val canvas = Canvas(bitmap)
-            drawable.setBounds(0, 0, canvas.width, canvas.height)
-            drawable.draw(canvas)
-            val icon = BitmapDescriptorFactory.fromBitmap(bitmap)
-
-            marker.setIcon(icon)
-            showBottomSheet(marker)
-            true
-        }
-    }
-
-    private fun showBottomSheet(marker: Marker) {
-        val dialog = BottomSheetDialog(this)
-        val view = layoutInflater.inflate(R.layout.item_business, null)
-
-        val businessNameTextView = view.findViewById<TextView>(R.id.businessNameTextView)
-        val kitchenTypeTextView = view.findViewById<TextView>(R.id.kitchenTypeTextView)
-        val locationTextView = view.findViewById<TextView>(R.id.locationTextView)
-
-        businessNameTextView.text = marker.title
-        kitchenTypeTextView.text = "Dünya Mutfağı"
-        locationTextView.text = "5 km"
-
-        dialog.setCancelable(true)
-        dialog.setContentView(view)
-        dialog.show()
-    }
-
-
 }
 
 data class Business(val name: String, val location: LatLng)
