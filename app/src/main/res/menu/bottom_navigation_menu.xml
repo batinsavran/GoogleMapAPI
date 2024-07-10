@@ -2,18 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
+        android:icon="@drawable/home"
         android:title="@string/customer_bottom_navigation_menu_home" />
     <item
         android:id="@+id/nav_discover"
+        android:icon="@drawable/discover"
         android:title="@string/customer_bottom_navigation_menu_discover" />
     <item
         android:id="@+id/nav_reservations"
+        android:icon="@drawable/calendar"
         android:title="@string/customer_bottom_navigation_menu_reservations" />
     <item
         android:id="@+id/nav_messages"
+        android:icon="@drawable/chat"
         android:title="@string/customer_bottom_navigation_menu_messages" />
     <item
         android:id="@+id/nav_profile"
+        android:icon="@drawable/profile"
         android:title="@string/customer_bottom_navigation_menu_profile" />
 
 </menu>
