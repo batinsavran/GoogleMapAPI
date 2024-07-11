@@ -1,6 +1,5 @@
 package com.example.learngit.business
 
-import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
@@ -15,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.learngit.R
+import com.example.learngit.databinding.ActivityMapsBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -31,10 +31,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var currentLocation: Location
     private lateinit var centerMarker: ImageView
     private lateinit var searchBar: EditText
+    private lateinit var binding: ActivityMapsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maps)
+        binding = ActivityMapsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -49,8 +51,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         confirmButton.setOnClickListener {
             val markerPosition = mMap.cameraPosition.target
             val address = getAddressFromLatLng(markerPosition)
-            val intent = Intent()
-            intent.putExtra("address", address)
+            val intent = Intent().apply {
+                putExtra("address", address.getAddressLine(0))
+                putExtra("locality", address.locality)
+                putExtra("state", address.adminArea)
+                putExtra("country", address.countryName)
+                putExtra("postalCode", address.postalCode)
+            }
             setResult(RESULT_OK, intent)
             finish()
         }
@@ -59,8 +66,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
             mMap.isMyLocationEnabled = true
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
@@ -71,7 +82,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                 }
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
         }
 
         mMap.setOnCameraIdleListener {
@@ -80,17 +95,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
                 mMap.isMyLocationEnabled = true
                 fusedLocationClient.lastLocation
                     .addOnSuccessListener { location: Location? ->
                         if (location != null) {
                             currentLocation = location
                             val currentLatLng = LatLng(location.latitude, location.longitude)
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
+                            mMap.animateCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    currentLatLng,
+                                    15f
+                                )
+                            )
                         }
                     }
             }
@@ -101,17 +129,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun updateSearchBarWithAddress(latLng: LatLng) {
         val address = getAddressFromLatLng(latLng)
-        searchBar.setText(address)
+        searchBar.setText(address.getAddressLine(0))
     }
 
-    private fun getAddressFromLatLng(latLng: LatLng): String {
+    private fun getAddressFromLatLng(latLng: LatLng): Address {
         val geocoder = Geocoder(this, Locale.getDefault())
-        val addresses: List<Address> = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)!!
-        return if (addresses.isNotEmpty()) {
-            val address: Address = addresses[0]
-            "${address.getAddressLine(0)}, ${address.locality}, ${address.countryName}"
+        val addresses: List<Address>? = try {
+            geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+        return if (!addresses.isNullOrEmpty()) {
+            addresses[0]
         } else {
-            "Address not found"
+            Address(Locale.getDefault()).apply {
+                setAddressLine(0, "Address not found")
+            }
         }
     }
+
 }
