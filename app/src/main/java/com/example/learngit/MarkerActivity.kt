@@ -1,26 +1,26 @@
-//package com.example.learngit
-//
-//import android.Manifest
-//import android.content.pm.PackageManager
-//import android.os.Bundle
-//import androidx.appcompat.app.AppCompatActivity
-//import androidx.core.app.ActivityCompat
-//import androidx.core.content.ContextCompat
-//import com.google.android.gms.location.FusedLocationProviderClient
-//import com.google.android.gms.location.LocationServices
-//import com.google.android.gms.maps.CameraUpdateFactory
-//import com.google.android.gms.maps.GoogleMap
-//import com.google.android.gms.maps.OnMapReadyCallback
-//import com.google.android.gms.maps.SupportMapFragment
-//import com.google.android.gms.maps.model.BitmapDescriptorFactory
-//import com.google.android.gms.maps.model.LatLng
-//import com.google.android.gms.maps.model.MarkerOptions
-//import com.google.android.material.chip.Chip
-//import com.google.android.material.chip.ChipGroup
-//import com.google.maps.android.SphericalUtil
-//
-//class MarkerActivity : AppCompatActivity(), OnMapReadyCallback {
-//
+package com.example.learngit
+
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.google.maps.android.SphericalUtil
+
+class MarkerActivity : AppCompatActivity() {
+
 //    private lateinit var mMap: GoogleMap
 //    private lateinit var fusedLocationClient: FusedLocationProviderClient
 //    private var currentLatLng: LatLng? = null // Sınıf düzeyinde currentLatLng
@@ -126,6 +126,6 @@
 //    private fun getDistanceInMeters(start: LatLng, end: LatLng): Double {
 //        return SphericalUtil.computeDistanceBetween(start, end)
 //    }
-//}
-//
-////data class com.example.learngit.Business(val name: String, val location: LatLng)
+}
+
+//data class com.example.learngit.Business(val name: String, val location: LatLng)
