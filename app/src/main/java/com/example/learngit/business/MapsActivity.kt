@@ -8,6 +8,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var currentLocation: Location
     private lateinit var centerMarker: ImageView
+    private lateinit var searchBar: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +43,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         centerMarker = findViewById(R.id.center_marker)
+        searchBar = findViewById(R.id.search_bar)
 
-        val confirmButton: Button = findViewById(R.id.confirm_button)
+        val confirmButton: Button = findViewById(R.id.confirmButton)
         confirmButton.setOnClickListener {
             val markerPosition = mMap.cameraPosition.target
             val address = getAddressFromLatLng(markerPosition)
@@ -70,6 +73,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
         }
+
+        mMap.setOnCameraIdleListener {
+            val centerPosition = mMap.cameraPosition.target
+            updateSearchBarWithAddress(centerPosition)
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -89,6 +97,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun updateSearchBarWithAddress(latLng: LatLng) {
+        val address = getAddressFromLatLng(latLng)
+        searchBar.setText(address)
     }
 
     private fun getAddressFromLatLng(latLng: LatLng): String {
