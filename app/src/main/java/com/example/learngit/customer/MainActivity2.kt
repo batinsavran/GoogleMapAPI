@@ -1,6 +1,6 @@
 //package com.example.learngit
 //
-//import CustomInfoWindowAdapter
+//import com.example.learngit.customer.CustomInfoWindowAdapter
 //import android.Manifest
 //import android.content.pm.PackageManager
 //import android.graphics.Bitmap
@@ -29,7 +29,7 @@
 //    private lateinit var fusedLocationClient: FusedLocationProviderClient
 //    private lateinit var binding: ActivityMain2Binding
 //    private var currentLatLng: LatLng? = null
-//    private lateinit var customInfoWindowAdapter: CustomInfoWindowAdapter
+//    private lateinit var customInfoWindowAdapter: com.example.learngit.customer.CustomInfoWindowAdapter
 //
 ////    private val category1Businesses = listOf(
 ////        Business("Restorant A", LatLng(36.7391, 29.9270)),
@@ -111,7 +111,7 @@
 //            updateMarkers()
 //        }
 //
-//        customInfoWindowAdapter = CustomInfoWindowAdapter(layoutInflater)
+//        customInfoWindowAdapter = com.example.learngit.customer.CustomInfoWindowAdapter(layoutInflater)
 //        mMap.setInfoWindowAdapter(customInfoWindowAdapter)
 //
 //        mMap.setOnMarkerClickListener { marker ->

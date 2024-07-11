@@ -1,3 +1,5 @@
+package com.example.learngit.customer
+
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
