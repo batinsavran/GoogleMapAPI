@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.maps.android.SphericalUtil
 import java.util.Locale
 
@@ -38,8 +39,18 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     private var lastClickedMarker: Marker? = null
 
     private val category1Businesses = listOf(
-        Business("Restorant A", LatLng(36.7391, 29.9270), R.drawable.restaurant_a_image, "Türk Mutfağı"),
-        Business("Restorant B", LatLng(36.7320, 29.9145), R.drawable.restaurant_b_image, "İtalyan Mutfağı")
+        Business(
+            "Restorant A",
+            LatLng(36.7391, 29.9270),
+            R.drawable.restaurant_a_image,
+            "Türk Mutfağı"
+        ),
+        Business(
+            "Restorant B",
+            LatLng(36.7320, 29.9145),
+            R.drawable.restaurant_b_image,
+            "İtalyan Mutfağı"
+        )
     )
 
     private val category2Businesses = listOf(
@@ -67,6 +78,10 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
         initializeLocationClient()
         initializeMapFragment()
         setupChips()
+
+        binding.filter.setOnClickListener {
+            showBottomSheet()
+        }
     }
 
     private fun setupBottomNavigation() {
@@ -138,7 +153,11 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             mMap.isMyLocationEnabled = true
             getCurrentLocation()
         } else {
@@ -256,8 +275,9 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun showBusinessDetails(marker: Marker) {
         binding.cardView.visibility = View.VISIBLE
 
-        val business = (category1Businesses + category2Businesses + category3Businesses + category4Businesses)
-            .find { it.name == marker.title }
+        val business =
+            (category1Businesses + category2Businesses + category3Businesses + category4Businesses)
+                .find { it.name == marker.title }
 
         business?.let {
             binding.businessNameTextView.text = it.name
@@ -276,12 +296,20 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun getDistanceInMeters(start: LatLng, end: LatLng): Double {
         return SphericalUtil.computeDistanceBetween(start, end)
     }
+
+    private fun showBottomSheet() {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetView = layoutInflater.inflate(R.layout.bottomsheet_filter, null)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+    }
 }
+
 
 data class Business(
     val name: String,
     val location: LatLng,
-    val imageResId: Int, // image resource id
-    val kitchenType: String // restaurant type
+    val imageResId: Int,
+    val kitchenType: String
 )
 
