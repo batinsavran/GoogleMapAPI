@@ -7,14 +7,24 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.learngit.R
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var locationTextView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView = findViewById<TextView>(R.id.businesses_current_location_text_view)
-        textView.setOnClickListener {
+        locationTextView = findViewById(R.id.businesses_current_location_text_view)
+        locationTextView.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 1)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            val address = data?.getStringExtra("address")
+            locationTextView.text = address
         }
     }
 }
