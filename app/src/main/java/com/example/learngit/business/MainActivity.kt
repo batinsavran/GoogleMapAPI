@@ -2,29 +2,48 @@ package com.example.learngit.business
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.learngit.R
+import com.example.learngit.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var locationTextView: TextView
+
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var mapsActivityResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        locationTextView = findViewById(R.id.businesses_current_location_text_view)
-        locationTextView.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivityForResult(intent, 1)
+        // Register the ActivityResultLauncher
+        mapsActivityResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val data = result.data
+                val address = data?.getStringExtra("address") ?: "N/A"
+                val locality = data?.getStringExtra("locality") ?: "N/A"
+                val state = data?.getStringExtra("state") ?: "N/A"
+                val country = data?.getStringExtra("country") ?: "N/A"
+                val postalCode = data?.getStringExtra("postalCode") ?: "N/A"
+
+                binding.businessesCurrentLocationTextView.text = getString(
+                    R.string.location_info,
+                    address,
+                    locality,
+                    state,
+                    country,
+                    postalCode
+                )
+            }
         }
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            val address = data?.getStringExtra("address")
-            locationTextView.text = address
+        binding.businessesCurrentLocationTextView.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            mapsActivityResultLauncher.launch(intent)
         }
     }
 }
