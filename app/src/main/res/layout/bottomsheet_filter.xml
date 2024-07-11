@@ -272,14 +272,10 @@
                         android:text="Rezervasyona uygun olanları göster"
                         android:textSize="14sp" />
 
-                    <androidx.appcompat.widget.SwitchCompat
+                    <Switch
                         android:id="@+id/switch1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:track="@drawable/switch_track"
-                        android:thumb="@drawable/switch_thumb"
-                        android:textOff=""
-                        android:textOn="" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -299,14 +295,10 @@
                         android:text="Rezervasyon yapılmayanları göster"
                         android:textSize="14sp" />
 
-                    <androidx.appcompat.widget.SwitchCompat
+                    <Switch
                         android:id="@+id/switch2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:track="@drawable/switch_track"
-                        android:thumb="@drawable/switch_thumb"
-                        android:textOff=""
-                        android:textOn="" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -326,14 +318,10 @@
                         android:text="Sadece şu anda açık olanları göster"
                         android:textSize="14sp" />
 
-                    <androidx.appcompat.widget.SwitchCompat
+                    <Switch
                         android:id="@+id/switch3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:track="@drawable/switch_track"
-                        android:thumb="@drawable/switch_thumb"
-                        android:textOff=""
-                        android:textOn="" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
