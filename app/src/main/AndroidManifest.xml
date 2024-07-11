@@ -18,12 +18,8 @@
         android:theme="@style/Theme.LearnGit"
         tools:targetApi="31">
         <activity
-            android:name=".LastActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".customer.LastActivity"
+            android:exported="false">
         </activity>
         <activity
             android:name=".MainActivity2"
@@ -44,8 +40,12 @@
             android:label="@string/title_activity_maps">
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="false">
+            android:name=".business.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
