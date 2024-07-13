@@ -1,13 +1,14 @@
 package com.example.learngit.customer
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
 import com.google.maps.android.SphericalUtil
 import java.util.Locale
 
@@ -35,6 +37,7 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var binding: ActivityLastBinding
     private var currentLatLng: LatLng? = null
+    private lateinit var displayedBusinesses: List<Business>
 
     private lateinit var defaultIcon: BitmapDescriptor
     private lateinit var clickedIcon: BitmapDescriptor
@@ -43,26 +46,26 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     private val category1Businesses = listOf(
         Business(
             "Restorant A",
-            LatLng(36.7391, 29.9270),
+            LatLng(37.4121, -122.0900),
             R.drawable.restaurant_a_image,
             "Türk Mutfağı"
         ),
         Business(
             "Restorant B",
-            LatLng(36.7320, 29.9145),
+            LatLng(37.4130, -122.0920),
             R.drawable.restaurant_b_image,
             "İtalyan Mutfağı"
         )
     )
 
     private val category2Businesses = listOf(
-        Business("Cafe C", LatLng(36.7360, 29.9300), R.drawable.cafe_c_image, "Kahve"),
-        Business("Cafe D", LatLng(36.7380, 29.9240), R.drawable.cafe_d_image, "Tatlı")
+        Business("Cafe C", LatLng(37.4100, -122.0930), R.drawable.cafe_c_image, "Kahve"),
+        Business("Cafe D", LatLng(37.4080, -122.0940), R.drawable.cafe_d_image, "Tatlı")
     )
 
     private val category3Businesses = listOf(
-        Business("Meyhane E", LatLng(36.7330, 29.9160), R.drawable.meyhane_e_image, "Meyhane"),
-        Business("Meyhane F", LatLng(36.7340, 29.9180), R.drawable.meyhane_f_image, "Meyhane")
+        Business("Meyhane E", LatLng(37.4140, -122.0900), R.drawable.meyhane_e_image, "Meyhane"),
+        Business("Meyhane F", LatLng(37.4150, -122.0910), R.drawable.meyhane_f_image, "Meyhane")
     )
 
     private val category4Businesses = listOf(
@@ -86,21 +89,27 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.listButton.setOnClickListener {
-            val intent = Intent(this, ListBusinessActivity::class.java)
+            val filteredBusinesses = getFilteredBusinesses()
+            val gson = Gson()
+            val businessListJson = gson.toJson(filteredBusinesses)
+            val intent = Intent(this, ListBusinessActivity::class.java).apply {
+                putExtra("business_list", businessListJson)
+            }
             startActivity(intent)
         }
+
+
     }
 
     private fun setupBottomNavigation() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> true
-                R.id.nav_discover -> true
-                R.id.nav_reservations -> true
-                R.id.nav_messages -> true
-                R.id.nav_profile -> true
-                else -> false
+                R.id.nav_home, R.id.nav_discover, R.id.nav_reservations, R.id.nav_messages, R.id.nav_profile ->
+                    true
+
+                else ->
+                    false
             }
         }
     }
@@ -115,23 +124,20 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupChips() {
-        binding.chipRestoran.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) showBusinesses(category1Businesses)
-        }
+        val chipChangeListener = { _: CompoundButton, _: Boolean -> updateBusinessMarkers() }
 
-        binding.chipCafe.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) showBusinesses(category2Businesses)
-        }
-
-        binding.chipMeyhane.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) showBusinesses(category3Businesses)
-        }
-
-        binding.chipBar.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) showBusinesses(category4Businesses)
-        }
+        binding.chipRestoran.setOnCheckedChangeListener(chipChangeListener)
+        binding.chipCafe.setOnCheckedChangeListener(chipChangeListener)
+        binding.chipMeyhane.setOnCheckedChangeListener(chipChangeListener)
+        binding.chipBar.setOnCheckedChangeListener(chipChangeListener)
     }
 
+    private fun updateBusinessMarkers() {
+        val filteredBusinesses = getFilteredBusinesses()
+        mMap.clear()
+
+        filteredBusinesses.forEach { addBusinessMarker(it) }
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -154,7 +160,10 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.setOnMapClickListener {
             handleMapClick()
         }
+
+        getCurrentLocation()
     }
+
 
     private fun setupMapUI() {
         mMap.uiSettings.isMyLocationButtonEnabled = false
@@ -193,7 +202,7 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
                     currentLatLng = LatLng(location.latitude, location.longitude)
                     addCurrentLocationMarker()
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
-                    showBusinesses(category1Businesses + category2Businesses + category3Businesses)
+                    showBusinesses(category1Businesses + category2Businesses + category3Businesses+ category4Businesses)
                 }
             }
     }
@@ -229,21 +238,14 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun updateMarkers() {
-        val centerLatLng = mMap.cameraPosition.target
-        val radiusInMeters = 5000.0
-
-        val allBusinesses =
-            category1Businesses + category2Businesses + category3Businesses + category4Businesses
-
+        val filteredBusinesses = getFilteredBusinesses()
         mMap.clear()
 
-        for (business in allBusinesses) {
-            val businessLatLng = business.location
-            if (getDistanceInMeters(centerLatLng, businessLatLng) <= radiusInMeters) {
-                addBusinessMarker(business)
-            }
-        }
+        filteredBusinesses.forEach { addBusinessMarker(it) }
+
+        Log.d("LastActivity", "updateMarkers: Center LatLng: ${mMap.cameraPosition.target}")
     }
+
 
     private fun showBusinesses(businesses: List<Business>) {
         val centerLatLng = mMap.cameraPosition.target
@@ -251,13 +253,35 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.clear()
         currentLatLng?.let {
-            for (business in businesses) {
-                if (getDistanceInMeters(centerLatLng, business.location) <= radiusInMeters) {
-                    addBusinessMarker(business)
-                }
+            displayedBusinesses = businesses.filter {
+                getDistanceInMeters(centerLatLng, it.location) <= radiusInMeters
             }
+            displayedBusinesses.forEach { addBusinessMarker(it) }
+            Log.d("LastActivity", "showBusinesses: Displayed Businesses: $displayedBusinesses")
         }
     }
+
+    private fun getFilteredBusinesses(): List<Business> {
+        val centerLatLng = mMap.cameraPosition.target
+        val radiusInMeters = 5000.0
+
+        val allBusinesses =
+            category1Businesses + category2Businesses + category3Businesses + category4Businesses
+
+        val selectedCategories = mutableListOf<Business>()
+        if (binding.chipRestoran.isChecked) selectedCategories.addAll(category1Businesses)
+        if (binding.chipCafe.isChecked) selectedCategories.addAll(category2Businesses)
+        if (binding.chipMeyhane.isChecked) selectedCategories.addAll(category3Businesses)
+        if (binding.chipBar.isChecked) selectedCategories.addAll(category4Businesses)
+
+        val filteredBusinesses =
+            if (selectedCategories.isEmpty()) allBusinesses else selectedCategories
+
+        return filteredBusinesses.filter {
+            getDistanceInMeters(centerLatLng, it.location) <= radiusInMeters
+        }
+    }
+
 
     private fun addBusinessMarker(business: Business) {
         val drawable = ContextCompat.getDrawable(this, R.drawable.location)
@@ -305,7 +329,6 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
         return SphericalUtil.computeDistanceBetween(start, end)
     }
 
-    @SuppressLint("InflateParams")
     private fun showBottomSheet() {
         val bottomSheetDialog = BottomSheetDialog(this)
         val bottomSheetView = layoutInflater.inflate(R.layout.bottomsheet_filter, null)
@@ -321,4 +344,3 @@ data class Business(
     val imageResId: Int,
     val kitchenType: String
 )
-
