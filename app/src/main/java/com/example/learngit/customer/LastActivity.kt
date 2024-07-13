@@ -1,6 +1,8 @@
 package com.example.learngit.customer
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -82,6 +84,11 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.filter.setOnClickListener {
             showBottomSheet()
         }
+
+        binding.listButton.setOnClickListener {
+            val intent = Intent(this, ListBusinessActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupBottomNavigation() {
@@ -108,22 +115,23 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupChips() {
-        binding.chip1.setOnCheckedChangeListener { _, isChecked ->
+        binding.chipRestoran.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) showBusinesses(category1Businesses)
         }
 
-        binding.chip2.setOnCheckedChangeListener { _, isChecked ->
+        binding.chipCafe.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) showBusinesses(category2Businesses)
         }
 
-        binding.chip3.setOnCheckedChangeListener { _, isChecked ->
+        binding.chipMeyhane.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) showBusinesses(category3Businesses)
         }
 
-        binding.chip4.setOnCheckedChangeListener { _, isChecked ->
+        binding.chipBar.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) showBusinesses(category4Businesses)
         }
     }
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -297,6 +305,7 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
         return SphericalUtil.computeDistanceBetween(start, end)
     }
 
+    @SuppressLint("InflateParams")
     private fun showBottomSheet() {
         val bottomSheetDialog = BottomSheetDialog(this)
         val bottomSheetView = layoutInflater.inflate(R.layout.bottomsheet_filter, null)
