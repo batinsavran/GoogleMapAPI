@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 app:chipSpacingHorizontal="8dp"
                 app:singleLine="true"
-                app:singleSelection="true">
+                app:singleSelection="false">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter"
