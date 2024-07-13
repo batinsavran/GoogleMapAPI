@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toBottomOf="@id/textViewBusinessType">
 
                 <com.google.android.material.chip.Chip
-                android:id="@+id/chip1"
+                android:id="@+id/chip_filter_restoran"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 app:chipBackgroundColor="@color/chipBackgroundColor"
@@ -80,7 +80,7 @@
                 app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip2"
+                    android:id="@+id/chip_filter_cafe"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip3"
+                    android:id="@+id/chip_filter_meyhane"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip4"
+                    android:id="@+id/chip_filter_bar"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip5"
+                    android:id="@+id/chip_filter_kahve"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip6"
+                    android:id="@+id/chip_filter_pastane"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                 app:layout_constraintTop_toBottomOf="@id/textViewCuisineType">
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip7"
+                    android:id="@+id/chip_filter_dunya"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
@@ -175,7 +175,7 @@
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip8"
+                    android:id="@+id/chip_filter_turk"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip9"
+                    android:id="@+id/chip_filter_akdeniz"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -199,7 +199,7 @@
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip10"
+                    android:id="@+id/chip_filter_uzakdogu"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip11"
+                    android:id="@+id/chip_filter_streetfood"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -223,7 +223,7 @@
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip12"
+                    android:id="@+id/chip_filter_evyemekleri"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
