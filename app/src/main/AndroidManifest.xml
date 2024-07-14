@@ -24,17 +24,17 @@
 
         <activity
             android:name=".customer.LastActivity"
+            android:exported="false" >
+        </activity>
+
+        <activity
+            android:name=".customer.MainActivity2"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".customer.MainActivity2"
-            android:exported="false" >
         </activity>
 
         <activity
