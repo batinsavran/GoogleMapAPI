@@ -30,15 +30,7 @@ Business Locator App, kullanıcıların harita üzerinde belirli işletmeleri g�
      MAPS_API_KEY=YOUR_API_KEY_HERE
      ```
 
-3. **Projeyi Kopyalayın ve Yapılandırın**
-
-   - Bu projeyi yerel makinenize kopyalayın:
-     ```bash
-     git clone https://github.com/kullanici-adi/business-locator-app.git
-     cd business-locator-app
-     ```
-
-4. **Gerekli İzinleri Ekleyin**
+3. **Gerekli İzinleri Ekleyin**
 
    - `AndroidManifest.xml` dosyasına gerekli izinleri ekleyin:
      ```xml
@@ -46,7 +38,7 @@ Business Locator App, kullanıcıların harita üzerinde belirli işletmeleri g�
      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
      ```
 
-5. **Maps API Anahtarını Manifest Dosyasına Ekleyin**
+4. **Maps API Anahtarını Manifest Dosyasına Ekleyin**
 
    - `AndroidManifest.xml` dosyasına API anahtarınızı ekleyin:
      ```xml
