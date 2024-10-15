@@ -1,46 +1,46 @@
 # Business Locator App
 
-Business Locator App, kullanıcıların harita üzerinde belirli işletmeleri görüntüleyebileceği, filtreleyebileceği ve ayrıntılarını inceleyebileceği bir Android uygulamasıdır. Uygulama, Google Maps API kullanarak kullanıcıların konumlarını belirler ve yakınlarındaki işletmeleri gösterir.
+The Business Locator App is an Android application that allows users to view, filter, and explore specific businesses on a map. The app uses the Google Maps API to determine the user's location and display nearby businesses.
 
-## Özellikler
+## Features
 
-- Kullanıcının mevcut konumunu belirleme ve haritada gösterme
-- Belirli bir yarıçap içinde işletmeleri gösterme
-- İşletmeleri mutfak tipine göre filtreleme
-- İşletme detaylarını gösterme
-- İşletmeleri belirli bir zoom seviyesinde gösterme/kaldırma
+- Determine and display the user's current location on the map
+- Show businesses within a specific radius
+- Filter businesses by cuisine type
+- Display business details
+- Show/hide businesses at a specific zoom level
 
-## Gereksinimler
+## Requirements
 
 - Android Studio
-- Google Maps API Anahtarı
+- Google Maps API Key
 
-## Kurulum
+## Setup
 
-1. **Google Maps API Anahtarı Alın**
+1. **Obtain Google Maps API Key**
 
-   - Google Cloud Console üzerinden bir proje oluşturun.
-   - Google Maps Android API ve Google Places API'yi etkinleştirin.
-   - API anahtarınızı alın.
+   - Create a project on the Google Cloud Console.
+   - Enable the Google Maps Android API and Google Places API.
+   - Obtain your API key.
 
-2. **API Anahtarını Projeye Ekleyin**
+2. **Add API Key to Project**
 
-   - `local.properties` dosyasına aşağıdaki satırı ekleyin:
+   - Add the following line to your `local.properties` file:
      ```
      MAPS_API_KEY=YOUR_API_KEY_HERE
      ```
 
-3. **Gerekli İzinleri Ekleyin**
+3. **Add Required Permissions**
 
-   - `AndroidManifest.xml` dosyasına gerekli izinleri ekleyin:
+   - Add the necessary permissions to your `AndroidManifest.xml` file:
      ```xml
      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
      ```
 
-4. **Maps API Anahtarını Manifest Dosyasına Ekleyin**
+4. **Add Maps API Key to Manifest File**
 
-   - `AndroidManifest.xml` dosyasına API anahtarınızı ekleyin:
+   - Add your API key to the `AndroidManifest.xml` file:
      ```xml
      <application>
          ...
@@ -50,18 +50,16 @@ Business Locator App, kullanıcıların harita üzerinde belirli işletmeleri g�
      </application>
      ```
 
-## Kullanım
+## Usage
 
-1. **Uygulamayı Başlatın**
+1. **Launch the App**
 
-   - Android Studio'da projeyi açın ve bir cihazda veya emülatörde çalıştırın.
+   - Open the project in Android Studio and run it on a device or emulator.
 
-2. **Kullanıcı Konumunu Belirleyin**
+2. **Determine User Location**
 
-   - Uygulama açıldığında, kullanıcı konumunu belirler ve haritada gösterir.
+   - When the app is launched, it determines and displays the user's location on the map.
 
-3. **İşletmeleri Görüntüleyin ve Filtreleyin**
+3. **View and Filter Businesses**
 
-   - Haritada işletmeleri görebilir, işletme detaylarını inceleyebilir ve filtreleme seçenekleri ile işletmeleri mutfak tipine göre filtreleyebilirsiniz.
-
-
+   - View businesses on the map, explore business details, and filter businesses by cuisine type using the filtering options.
