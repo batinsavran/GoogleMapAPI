@@ -29,7 +29,8 @@
             android:exported="false" />
         <activity
             android:name=".customer.LastActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".customer.MainActivity2"
             android:exported="true">
@@ -42,14 +43,15 @@
         <activity
             android:name=".business.MapsActivity"
             android:exported="false"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps">
+        </activity>
         <activity
             android:name=".business.MainActivity"
-            android:exported="false"></activity>
-
+            android:exported="false">
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="" />
+            android:value="AIzaSyDorNpzkJSA1uDK9JanLOp_0lP5yyDGsUY" />
     </application>
 
 </manifest>

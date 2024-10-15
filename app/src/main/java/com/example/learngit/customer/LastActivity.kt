@@ -42,7 +42,7 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var defaultIcon: BitmapDescriptor
     private lateinit var clickedIcon: BitmapDescriptor
     private var lastClickedMarker: Marker? = null
-    private val ZOOM_THRESHOLD = 12.5f
+    private val zoomThreshold = 12.5f
 
     private val category1Businesses = listOf(
         Business(
@@ -150,7 +150,7 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
         checkLocationPermission()
 
         mMap.setOnCameraIdleListener {
-            if (mMap.cameraPosition.zoom >= ZOOM_THRESHOLD) {
+            if (mMap.cameraPosition.zoom >= zoomThreshold) {
                 updateMarkers()
             } else {
                 mMap.clear()
@@ -207,7 +207,7 @@ class LastActivity : AppCompatActivity(), OnMapReadyCallback {
                     currentLatLng = LatLng(location.latitude, location.longitude)
                     addCurrentLocationMarker()
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng!!, 15f))
-                    showBusinesses(category1Businesses + category2Businesses + category3Businesses+ category4Businesses)
+                    showBusinesses(category1Businesses + category2Businesses + category3Businesses + category4Businesses)
                 }
             }
     }
