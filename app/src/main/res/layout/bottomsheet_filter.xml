@@ -27,7 +27,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
-                android:text="Filtrele"
+                android:text="@string/filtrele"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/textViewClear"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Temizle"
+                android:text="@string/temizle"
                 android:textColor="#C3262626"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
-                android:text="İşletme Türü"
+                android:text="@string/letme_t_r"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 app:chipBackgroundColor="@color/chipBackgroundColor"
                 android:layout_height="wrap_content"
-                android:text="Restoran"
+                android:text="@string/restoran"
                 app:chipIconVisible="true"
                 app:chipIconTint="@color/black"
                 app:closeIconVisible="false"
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Cafe"
+                    android:text="@string/cafe"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Meyhane"
+                    android:text="@string/meyhane"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
@@ -109,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Bar"
+                    android:text="@string/bar"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Kahve"
+                    android:text="@string/kahve"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Pastane"
+                    android:text="@string/pastane"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
@@ -148,7 +148,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
-                android:text="Mutfak Türü"
+                android:text="@string/mutfak_t_r"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -168,7 +168,7 @@
                     android:layout_width="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
                     android:layout_height="wrap_content"
-                    android:text="Dünya"
+                    android:text="@string/d_nya"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
@@ -180,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Türk"
+                    android:text="@string/t_rk"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
@@ -192,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Akdeniz"
+                    android:text="@string/akdeniz"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
@@ -204,31 +204,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Uzakdoğu"
+                    android:text="@string/uzakdo_u"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_filter_streetfood"
+                    android:id="@+id/chip_filter_street_food"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Sokak lezzetleri"
+                    android:text="@string/sokak_lezzetleri"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
                     app:rippleColor="@color/rippleColor" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_filter_evyemekleri"
+                    android:id="@+id/chip_filter_ev_yemekleri"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/chipBackgroundColor"
-                    android:text="Ev yemekleri"
+                    android:text="@string/ev_yemekleri"
                     app:chipIconVisible="true"
                     app:chipIconTint="@color/black"
                     app:closeIconVisible="false"
@@ -242,7 +242,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
-                android:text="Diğer Seçenekler"
+                android:text="@string/di_er_se_enekler"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -269,13 +269,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textStyle="bold"
-                        android:text="Rezervasyona uygun olanları göster"
+                        android:text="@string/rezervasyona_uygun_olanlar_g_ster"
                         android:textSize="14sp" />
 
                     <Switch
                         android:id="@+id/switch1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                 </LinearLayout>
 
@@ -292,13 +293,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textStyle="bold"
-                        android:text="Rezervasyon yapılmayanları göster"
+                        android:text="@string/rezervasyon_yap_lmayanlar_g_ster"
                         android:textSize="14sp" />
 
                     <Switch
                         android:id="@+id/switch2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                 </LinearLayout>
 
@@ -315,13 +317,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textStyle="bold"
-                        android:text="Sadece şu anda açık olanları göster"
+                        android:text="@string/sadece_u_anda_a_k_olanlar_g_ster"
                         android:textSize="14sp" />
 
                     <Switch
                         android:id="@+id/switch3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                 </LinearLayout>
 
@@ -336,7 +339,7 @@
                 android:background="@drawable/button_background"
                 android:elevation="3dp"
                 android:fontFamily="sans-serif"
-                android:text="Sonuçları Göster"
+                android:text="@string/sonu_lar_g_ster"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
