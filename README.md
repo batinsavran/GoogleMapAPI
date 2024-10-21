@@ -1,65 +1,56 @@
 # Business Locator App
 
-The Business Locator App is an Android application that allows users to view, filter, and explore specific businesses on a map. The app uses the Google Maps API to determine the user's location and display nearby businesses.
+## Overview
+The **Business Locator App** is an Android application designed to help users discover and explore businesses on a map using the Google Maps API. This app features dynamic location tracking, business filtering, and detailed business information displays. 
 
-## Features
+### Features:
+- **User Location:** Automatically determines and displays the user’s current location on the map.
+- **Business Search:** Displays nearby businesses within a certain radius.
+- **Filters:** Allows filtering businesses by cuisine type or category.
+- **Details View:** Shows business details like name, type, and location.
+- **Dynamic Zoom:** Adjusts visible businesses based on the zoom level.
 
-- Determine and display the user's current location on the map
-- Show businesses within a specific radius
-- Filter businesses by cuisine type
-- Display business details
-- Show/hide businesses at a specific zoom level
+## Prerequisites
+- **Android Studio:** Required to run the project.
+- **Google Maps API Key:** Obtainable from Google Cloud Console.
 
-## Requirements
+## Setup Guide
 
-- Android Studio
-- Google Maps API Key
+1. **Google Maps API Key:**
+    - Navigate to [Google Cloud Console](https://console.cloud.google.com/).
+    - Create a project and enable the **Google Maps Android API** and **Google Places API**.
+    - Obtain your API key.
 
-## Setup
+2. **Configure API Key:**
+    - Open the `local.properties` file and add your API key:
+      ```properties
+      MAPS_API_KEY=YOUR_API_KEY_HERE
+      ```
 
-1. **Obtain Google Maps API Key**
+3. **Permissions:**
+    - Add location permissions in the `AndroidManifest.xml`:
+      ```xml
+      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+      ```
 
-   - Create a project on the Google Cloud Console.
-   - Enable the Google Maps Android API and Google Places API.
-   - Obtain your API key.
+4. **API Key in Manifest:**
+    - Add the key to the `AndroidManifest.xml`:
+      ```xml
+      <application>
+          ...
+          <meta-data
+              android:name="com.google.android.geo.API_KEY"
+              android:value="${MAPS_API_KEY}" />
+      </application>
+      ```
 
-2. **Add API Key to Project**
+## Usage Instructions
+1. **Launch the App:**
+    - Open the project in Android Studio and run it on a device or emulator.
+2. **Explore Businesses:**
+    - The map will show your location along with nearby businesses.
+    - Use the filter feature to find businesses by cuisine.
 
-   - Add the following line to your `local.properties` file:
-     ```
-     MAPS_API_KEY=YOUR_API_KEY_HERE
-     ```
-
-3. **Add Required Permissions**
-
-   - Add the necessary permissions to your `AndroidManifest.xml` file:
-     ```xml
-     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-     ```
-
-4. **Add Maps API Key to Manifest File**
-
-   - Add your API key to the `AndroidManifest.xml` file:
-     ```xml
-     <application>
-         ...
-         <meta-data
-             android:name="com.google.android.geo.API_KEY"
-             android:value="${MAPS_API_KEY}" />
-     </application>
-     ```
-
-## Usage
-
-1. **Launch the App**
-
-   - Open the project in Android Studio and run it on a device or emulator.
-
-2. **Determine User Location**
-
-   - When the app is launched, it determines and displays the user's location on the map.
-
-3. **View and Filter Businesses**
-
-   - View businesses on the map, explore business details, and filter businesses by cuisine type using the filtering options.
+## Contributions
+Feel free to contribute by creating issues or submitting pull requests. 
